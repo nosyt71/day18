@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(path="/demo")
@@ -20,4 +21,15 @@ public class DemoController {
         }
     }
     
+    @GetMapping(path="/healthz")
+    public ModelAndView getHealthz() {
+        ModelAndView mav = new ModelAndView();
+        try {
+            mav.setViewName("healthy");
+        } catch (Exception ex) {
+            mav.setViewName("unhealthy");
+        }
+
+        return mav;
+    }
 }
